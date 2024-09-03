@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance APP</title>
+    <link rel="stylesheet" href="styless.css">
+    <script src = "index.js" defer></script>
+</head>
+<body>
+    <h1>Personal Finance Simulator</h1>
+    <div id="formDivPost">
+        <form action="http://localhost:3000/transactions" method="post" id="formsPost">
+            
+            <input type="hidden" id="transactionID" name="id">
+            <label for="transactionName">Transaction Name: </label>
+            <input type="text" id="transactionName" name="name">
+            <label for="transactionValue">Transaction Value: </label>
+            <input type="text" id="transactionValue" name="value">
+            <button type="submit" id="transButton">Post</button>
+        </form>
+    </div>
+ 
+    <div>
+        <article id="historyArea">
+
+        </article>
+    </div>
+</body>
+</html>

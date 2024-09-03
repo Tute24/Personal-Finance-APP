@@ -1,0 +1,10 @@
+.transDiv{
+    display: flex;
+    color: blue;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+p{
+    background-color: aquamarine;
+}
