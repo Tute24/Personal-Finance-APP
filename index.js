@@ -24,10 +24,16 @@ let transactionList = function (backData){
     editButton.id = `${backData.id}`
     editButton.addEventListener('click',editButtonFunctionality)
 
+    let removeButton = document.createElement('button')
+    removeButton.type = "button"
+    removeButton.innerText = "Delete"
+    removeButton.id = `remove-${backData.id}`
+    removeButton.addEventListener('click',removeButtonFunctionality)
+
     let divCreated = document.createElement('div')
     divCreated.classList.add('transDiv')
     divCreated.id = `id-${backData.id}`
-    divCreated.append(transactionAlert,nameHeader,valueHeader,editButton)
+    divCreated.append(transactionAlert,nameHeader,valueHeader,editButton, removeButton)
 
     let article = document.getElementById('historyArea')
     article.appendChild(divCreated)
@@ -46,6 +52,18 @@ let editButtonFunctionality = function(ev){
     document.getElementById('transactionID').value = transID.id
     document.getElementById('transactionName').value = transID.name
     document.getElementById('transactionValue').value = transID.value
+}
+
+let removeButtonFunctionality = async function(ev){
+    let referredDiv = ev.target.parentNode
+    referredDiv.remove()
+    let removeBttnID = ev.target.id
+    let soloID = removeBttnID.slice(7)
+    let indexRemove = transactionsArray.indexOf(element => element.id === soloID)
+    transactionsArray.splice(indexRemove,1)
+    
+
+    const response = await fetch (`http://localhost:3000/transactions/${soloID}`,{method:'DELETE'})
 }
 
 let showBalance = async function(){
