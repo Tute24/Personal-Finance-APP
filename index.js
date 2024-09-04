@@ -43,6 +43,7 @@ let editButtonFunctionality = function(ev){
     let bttnID = ev.target.id
 
     let transID = transactionsArray.find(element => element.id === bttnID)
+    document.getElementById('transactionID').value = transID.id
     document.getElementById('transactionName').value = transID.name
     document.getElementById('transactionValue').value = transID.value
 }
@@ -62,25 +63,42 @@ document.addEventListener('DOMContentLoaded',()=>{
     showBalance()
 })
 
-let formsPost= document.getElementById('formsPost')
-formsPost.addEventListener('submit',async (ev)=>{
+let forms= document.getElementById('forms')
+forms.addEventListener('submit',async (ev)=>{
     
     ev.preventDefault()
-    let newTrans= {       
+    let infosTrans= {       
         name: document.getElementById('transactionName').value,
         value: document.getElementById('transactionValue').value
     }
 
-    const response = await fetch('http://localhost:3000/transactions',{
-        method: 'POST',
-        headers:{
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newTrans)
-    }).then(res => res.json())
-     
-    transactionList(response)
-    transactionsArray.push(response)
+    let transIdValue = document.getElementById('transactionID').value
+    let checkID = transactionsArray.find(element => element.id === transIdValue)
+
+    if(checkID){
+        const response = await fetch(`http://localhost:3000/transactions/${transIdValue}`,{
+            method: 'PUT',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(infosTrans)
+        }).then(res => res.json())
+        let indexReplace = transactionsArray.indexOf(checkID)
+         transactionsArray.splice(indexReplace,1,response)
+        document.getElementById(`id-${transIdValue}`).remove()
+        transactionList(response)
+    } else{
+        const response = await fetch('http://localhost:3000/transactions',{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(infosTrans)
+        }).then(res => res.json())
+        transactionsArray.push(response)
+        transactionList(response)
+    }
+    
     showBalance()
     formsPost.reset()
 }
