@@ -61,9 +61,8 @@ let removeButtonFunctionality = async function(ev){
     let soloID = removeBttnID.slice(7)
     let indexRemove = transactionsArray.indexOf(element => element.id === soloID)
     transactionsArray.splice(indexRemove,1)
-    
-
     const response = await fetch (`http://localhost:3000/transactions/${soloID}`,{method:'DELETE'})
+    showBalance()
 }
 
 let showBalance = async function(){
@@ -118,7 +117,7 @@ forms.addEventListener('submit',async (ev)=>{
     }
     
     showBalance()
-    formsPost.reset()
+    forms.reset()
 }
 )
 
