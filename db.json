@@ -1,29 +1,9 @@
 {
   "transactions": [
     {
-      "id": "1",
-      "name": "Inital Balance",
-      "value": 1000
-    },
-    {
-      "name": "TryApp",
-      "value": "100",
-      "id": "dd6b"
-    },
-    {
-      "name": "tute",
-      "value": "10",
-      "id": "98e8"
-    },
-    {
-      "name": "Arthur ",
-      "value": "25",
-      "id": "e771"
-    },
-    {
-      "name": "tes",
-      "value": "80",
-      "id": "87cc"
+      "id": "02ba",
+      "name": "Try",
+      "value": "200"
     }
   ]
 }
